@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Users List</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #000;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px;
+    }
+
+    table {
+      width: 80%;
+      border-collapse: collapse;
+      background-color: #fff;
+      color: #000;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #28a745;
+      color: white;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Registered Users</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody id="usersTableBody"></tbody>
+  </table>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCDaauyY8PZkjldfeQg52q_VsvIWsZUil8",
+      authDomain: "tourism-project-a7aa4.firebaseapp.com",
+      databaseURL: "https://tourism-project-a7aa4-default-rtdb.firebaseio.com",
+      projectId: "tourism-project-a7aa4",
+      storageBucket: "tourism-project-a7aa4.appspot.com",
+      messagingSenderId: "289286412408",
+      appId: "1:289286412408:web:4a4b452746e478b3f2f58d"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const usersRef = ref(db, 'users');
+
+    const usersTableBody = document.getElementById("usersTableBody");
+
+    onValue(usersRef, (snapshot) => {
+      usersTableBody.innerHTML = ""; // clear before load
+      snapshot.forEach((child) => {
+        const user = child.val();
+        const row = `<tr>
+                      <td>${user.name}</td>
+                      <td>${user.email}</td>
+                    </tr>`;
+        usersTableBody.innerHTML += row;
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Aswan Attractions</title>
+  <style>
+    body {
+      background: linear-gradient(270deg, #000000, #1a1a1a, #333333);
+      background-size: 600% 600%;
+      animation: gradientBG 10s ease infinite;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    @keyframes gradientBG {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    h1 {
+      text-align: center;
+      color: #ffc107;
+    }
+
+    .place {
+      background-color: #222;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #ffc107;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      transition: transform 0.3s ease;
+    }
+
+    .place:hover {
+      animation: shake 0.5s;
+      box-shadow: 0 0 15px #00e5ff;
+    }
+
+    @keyframes shake {
+      0% { transform: translate(0px); }
+      25% { transform: translate(2px, -2px); }
+      50% { transform: translate(-2px, 2px); }
+      75% { transform: translate(2px, 2px); }
+      100% { transform: translate(0px); }
+    }
+
+    .place img {
+      width: 150px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 8px;
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    .place img:hover {
+      transform: scale(1.05);
+      filter: brightness(1.2);
+    }
+
+    .place-info {
+      flex: 1;
+    }
+
+    .place h3 {
+      margin: 0;
+      color: #00e5ff;
+    }
+
+    .place p {
+      margin: 5px 0 10px;
+    }
+
+    .place a button {
+      background-color: #ffc107;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .place a button:hover {
+      background-color: #ffca28;
+    }
+
+    .nav-links {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .nav-links a {
+      color: #ffc107;
+      margin: 0 10px;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: background-color 0.3s;
+    }
+
+    .nav-links a:hover {
+      background-color: #444;
+    }
+
+    .nav-links .current-page {
+      background-color: #ffc107;
+      color: #000;
+      border-bottom: 3px solid #fff;
+      font-weight: bolder;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Aswan Attractions</h1>
+
+  <!-- Philae Temple -->
+  <div class="place">
+    <img src="images/Philae Temple.jpg" alt="Philae Temple">
+    <div class="place-info">
+      <h3>Philae Temple</h3>
+      <p>Beautiful temple complex dedicated to the goddess Isis, located on an island in the Nile.</p>
+      <a href="booking.html?place=Philae%20Temple"><button>Book Now</button></a>
+    </div>
+  </div>
+
+  <!-- High Dam -->
+  <div class="place">
+    <img src="images/High Dam.jpg" alt="High Dam">
+    <div class="place-info">
+      <h3>High Dam</h3>
+      <p>One of the world’s largest embankment dams, vital for Egypt’s irrigation and electricity.</p>
+      <a href="booking.html?place=High%20Dam"><button>Book Now</button></a>
+    </div>
+  </div>
+
+  <!-- Unfinished Obelisk -->
+  <div class="place">
+    <img src="images/Unfinished Obelisk.jpg" alt="Unfinished Obelisk">
+    <div class="place-info">
+      <h3>Unfinished Obelisk</h3>
+      <p>A huge ancient obelisk left partially carved in the bedrock, showcasing ancient engineering.</p>
+      <a href="booking.html?place=Unfinished%20Obelisk"><button>Book Now</button></a>
+    </div>
+  </div>
+
+  <!-- Nubian Museum -->
+  <div class="place">
+    <img src="images/Nubian Museum.jpg" alt="Nubian Museum">
+    <div class="place-info">
+      <h3>Nubian Museum</h3>
+      <p>Modern museum highlighting the culture and history of Nubia and southern Egypt.</p>
+      <a href="booking.html?place=Nubian%20Museum"><button>Book Now</button></a>
+    </div>
+  </div>
+
+  <!-- Navigation Links -->
+  <div class="nav-links">
+    <a href="cairo.html">Cairo</a>
+    <a href="giza.html">Giza</a>
+    <a href="alexandria.html">Alexandria</a>
+    <a href="luxor.html">Luxor</a>
+    <a href="aswan.html" class="current-page">Aswan</a>
+  </div>
+
+</body>
+</html>

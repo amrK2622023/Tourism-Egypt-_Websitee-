@@ -1,0 +1,132 @@
+<!DOCTYPE html><html lang="en">  <head>  
+  <meta charset="UTF-8">  
+  <title>Login</title>  
+  <style>  
+    body {  
+      font-family: Arial, sans-serif;  
+      background-color: #000;  
+      display: flex;  
+      justify-content: center;  
+      align-items: center;  
+      height: 100vh;  
+      margin: 0;  
+      position: relative;  
+    }.login-box {  
+  background-color: #fff;  
+  padding: 30px;  
+  border-radius: 15px;  
+  width: 300px;  
+  text-align: center;  
+  position: relative;  
+  animation: glow 5s infinite alternate;  
+}  @keyframes glow {
+0% { box-shadow: 0 0 15px #ff7f50, 0 0 30px #ff7f50; }
+50% { box-shadow: 0 0 15px #1e90ff, 0 0 30px #1e90ff; }
+100% { box-shadow: 0 0 15px #32cd32, 0 0 30px #32cd32; }
+}
+
+h2 {
+color: #333;
+}
+
+input {
+width: 100%;
+padding: 10px;
+margin: 10px 0;
+border-radius: 8px;
+border: 1px solid #ccc;
+}
+
+button {
+width: 100%;
+padding: 10px;
+background-color: #007bff;
+color: white;
+border: none;
+border-radius: 8px;
+margin-top: 10px;
+cursor: pointer;
+font-size: 16px;
+}
+
+button:hover {
+opacity: 0.9;
+}
+
+.link {
+margin-top: 10px;
+display: block;
+color: #007bff;
+text-decoration: none;
+font-size: 14px;
+}
+
+.popup {
+position: absolute;
+bottom: 20px;
+left: 50%;
+transform: translateX(-50%);
+background-color: #000;
+color: #ffc107;
+padding: 20px;
+border-radius: 10px;
+text-align: center;
+box-shadow: 0 0 10px #ffc107;
+animation: slideUp 0.5s forwards;
+z-index: 1;
+}
+
+@keyframes slideUp {
+to {
+bottom: 100px;
+}
+}
+
+.popup button {
+margin-top: 10px;
+background-color: #ffc107;
+color: black;
+border: none;
+padding: 5px 10px;
+border-radius: 5px;
+cursor: pointer;
+}
+
+  </style>  
+</head>  
+<body>  <div class="login-box">  
+    <h2>Login</h2>  
+    <input type="email" id="email" placeholder="Email" required>  
+    <input type="password" id="password" placeholder="Password" required>  
+    <button onclick="handleLogin()">Login</button>  
+    <a href="SignUp.html" class="link">Don't have an account? Sign up</a>  
+  </div>  <script>  
+    function handleLogin() {  
+      const email = document.getElementById("email").value.trim();  
+      const password = document.getElementById("password").value.trim();  if (!email || !password) {  
+    showPopup("Please fill in all fields.");  
+  } else {  
+    showPopup("Login successful!", true);  
+  }  
+}  
+
+function showPopup(message, redirect = false) {  
+  const popup = document.createElement("div");  
+  popup.className = "popup";  
+  popup.innerHTML = `<p>${message}</p><button onclick="closePopup(${redirect})">OK</button>`;  
+  document.querySelector(".login-box").appendChild(popup);  
+}  
+
+function closePopup(redirect) {  
+  const popup = document.querySelector(".popup");  
+  if (popup) {  
+    popup.remove();  
+  }  
+  if (redirect) {  
+    window.location.href = "provinces.html";  
+  }  
+}
+
+</script></body>
+
+</html>

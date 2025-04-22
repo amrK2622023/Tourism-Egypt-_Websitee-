@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Luxor Attractions</title>
+  <style>
+    body {
+      background: linear-gradient(270deg, #000000, #1a1a1a, #333333);
+      background-size: 600% 600%;
+      animation: gradientBG 10s ease infinite;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    @keyframes gradientBG {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    h1 {
+      text-align: center;
+      color: #ffc107;
+    }
+
+    .place-container {
+      max-width: 100%;
+      margin: 0 auto;
+    }
+
+    .place {
+      background-color: #222;
+      padding: 20px;
+      margin: 15px 0;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #ffc107;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      transition: transform 0.3s ease;
+      width: 100%;
+    }
+
+    .place:hover {
+      animation: shake 0.5s;
+      box-shadow: 0 0 15px #00e5ff;
+    }
+
+    @keyframes shake {
+      0% { transform: translate(0px); }
+      25% { transform: translate(2px, -2px); }
+      50% { transform: translate(-2px, 2px); }
+      75% { transform: translate(2px, 2px); }
+      100% { transform: translate(0px); }
+    }
+
+    .place img {
+      width: 200px;
+      height: 130px;
+      object-fit: cover;
+      border-radius: 8px;
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    .place img:hover {
+      transform: scale(1.05);
+      filter: brightness(1.2);
+    }
+
+    .place-info {
+      flex: 1;
+    }
+
+    .place h3 {
+      margin: 0;
+      color: #00e5ff;
+    }
+
+    .place p {
+      margin: 5px 0 10px;
+    }
+
+    .place a button {
+      background-color: #ffc107;
+      color: black;
+      font-weight: bold;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .place a button:hover {
+      background-color: #ffca28;
+      transform: scale(1.05);
+    }
+
+    .nav-links {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .nav-links a {
+      color: #ffc107;
+      margin: 0 10px;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 6px 12px;
+      border-radius: 6px;
+      transition: background-color 0.3s;
+    }
+
+    .nav-links a:hover {
+      background-color: #444;
+    }
+
+    .nav-links .current-page {
+      background-color: #ffc107;
+      color: #000;
+      border-bottom: 3px solid #fff;
+      font-weight: bolder;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Luxor Attractions</h1>
+
+  <div class="place-container">
+    <!-- Karnak Temple -->
+    <div class="place">
+      <img src="images/Karnak Temple.jpg" alt="Karnak Temple">
+      <div class="place-info">
+        <h3>Karnak Temple</h3>
+        <p>One of the largest religious complexes in the world, dedicated to the Theban Triad.</p>
+        <a href="booking.html?place=Karnak Temple"><button>Book Now</button></a>
+      </div>
+    </div>
+
+    <!-- Luxor Temple -->
+    <div class="place">
+      <img src="images/Luxor Temple.jpg" alt="Luxor Temple">
+      <div class="place-info">
+        <h3>Luxor Temple</h3>
+        <p>A grand temple located on the east bank of the Nile, dedicated to the Theban Triad.</p>
+        <a href="booking.html?place=Luxor Temple"><button>Book Now</button></a>
+      </div>
+    </div>
+
+    <!-- Valley of the Kings -->
+    <div class="place">
+      <img src="images/Valley of the kings.jpg" alt="Valley of the Kings">
+      <div class="place-info">
+        <h3>Valley of the Kings</h3>
+        <p>The burial place of many of Egypt's Pharaohs, including Tutankhamun.</p>
+        <a href="booking.html?place=Valley of the Kings"><button>Book Now</button></a>
+      </div>
+    </div>
+
+    <!-- Hatshepsut Temple -->
+    <div class="place">
+      <img src="images/Hatshepsut Temple.jpg" alt="Hatshepsut Temple">
+      <div class="place-info">
+        <h3>Hatshepsut Temple</h3>
+        <p>A stunning mortuary temple built for the female Pharaoh Hatshepsut.</p>
+        <a href="booking.html?place=Hatshepsut Temple"><button>Book Now</button></a>
+      </div>
+    </div>
+
+    <!-- Luxor Museum -->
+    <div class="place">
+      <img src="images/Luxor Museum.jpg" alt="Luxor Museum">
+      <div class="place-info">
+        <h3>Luxor Museum</h3>
+        <p>A museum showcasing antiquities from Luxor and the surrounding area.</p>
+        <a href="booking.html?place=Luxor Museum"><button>Book Now</button></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Links -->
+  <div class="nav-links">
+    <a href="cairo.html">Cairo</a>
+    <a href="giza.html">Giza</a>
+    <a href="alexandria.html">Alexandria</a>
+    <a href="luxor.html" class="current-page">Luxor</a>
+    <a href="aswan.html">Aswan</a>
+  </div>
+
+</body>
+</html>

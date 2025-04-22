@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Booking Page</title>
+  <style>
+    body {
+      background-color: #222;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .place-info {
+      text-align: center;
+    }
+
+    .place-info img {
+      width: 100%;
+      max-width: 500px;
+      border-radius: 10px;
+    }
+
+    .place-info h2 {
+      margin-top: 20px;
+      font-size: 2rem;
+    }
+
+    .stars {
+      color: gold;
+    }
+
+    .form-section {
+      margin-top: 40px;
+    }
+
+    label {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    select, input[type="date"], input[type="number"], button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      font-size: 1rem;
+      border-radius: 5px;
+      border: none;
+    }
+
+    button {
+      background-color: #ffc107;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #ffca28;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .error {
+      color: red;
+      font-size: 1rem;
+      text-align: center;
+    }
+
+    .total-price {
+      text-align: right;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .btn-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .btn-container button {
+      background-color: #333;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="place-info">
+      <!-- صورة المكان -->
+      <img src="images/Egyptian-Museum.jpg" alt="Egyptian Museum">
+      <h2>Egyptian Museum</h2>
+      <!-- وصف المكان -->
+      <p>The Egyptian Museum houses one of the most extensive collections of ancient Egyptian antiquities.</p>
+      <!-- التقييم بالنجوم -->
+      <div class="stars">
+        &#9733;&#9733;&#9733;&#9733;&#9734; <!-- أربعة نجوم -->
+      </div>
+    </div>
+
+    <!-- اختيار اليوم -->
+    <div class="form-section">
+      <label for="day">Select Day:</label>
+      <select id="day">
+        <option value="sunday">Sunday</option>
+        <option value="monday">Monday</option>
+        <option value="tuesday">Tuesday</option>
+        <option value="wednesday">Wednesday</option>
+        <option value="thursday">Thursday</option>
+        <option value="friday">Friday (Weekend - Higher Price)</option>
+        <option value="saturday">Saturday (Weekend - Higher Price)</option>
+      </select>
+    </div>
+
+    <!-- اختيار الوقت -->
+    <div class="form-section">
+      <label for="time">Select Time:</label>
+      <select id="time">
+        <option value="9-12">9:00 AM - 12:00 PM</option>
+        <option value="12-3">12:00 PM - 3:00 PM</option>
+        <option value="3-6">3:00 PM - 6:00 PM</option>
+      </select>
+    </div>
+
+    <!-- اختيار مرشد سياحي -->
+    <div class="form-section">
+      <label for="guide">Do you want a tour guide?</label>
+      <select id="guide">
+        <option value="no">No</option>
+        <option value="yes">Yes (+200 EGP)</option>
+      </select>
+    </div>
+
+    <!-- زر الدفع -->
+    <div class="btn-container">
+      <button id="payNow" disabled>Pay Now</button>
+      <div class="total-price">
+        <span id="totalPrice">Total Price: 400 EGP</span>
+      </div>
+    </div>
+
+    <!-- رسالة الخطأ إذا كان العدد المكتمل -->
+    <div class="error hidden" id="errorMsg">Sorry, this time slot is fully booked. Please choose another time or day.</div>
+  </div>
+
+  <script>
+    const payButton = document.getElementById('payNow');
+    const errorMsg = document.getElementById('errorMsg');
+    const totalPriceText = document.getElementById('totalPrice');
+    const daySelect = document.getElementById('day');
+    const timeSelect = document.getElementById('time');
+    const guideSelect = document.getElementById('guide');
+
+    let basePrice = 400;  // Default price
+
+    // تحديث السعر بناءً على اختيار اليوم
+    daySelect.addEventListener('change', () => {
+      if (daySelect.value === 'friday' || daySelect.value === 'saturday') {
+        basePrice = 500;  // سعر الويك إند
+      } else {
+        basePrice = 400;  // السعر العادي
+      }
+
+      // تحديث السعر الإجمالي
+      updateTotalPrice();
+    });
+
+    // تحديث السعر بناءً على اختيار مرشد سياحي
+    guideSelect.addEventListener('change', () => {
+      if (guideSelect.value === 'yes') {
+        basePrice += 200;  // إضافة تكلفة المرشد
+      } else {
+        basePrice -= 200;  // إزالة تكلفة المرشد
+      }
+
+      updateTotalPrice();
+    });
+
+    // تحديث السعر الكلي
+    function updateTotalPrice() {
+      totalPriceText.textContent = `Total Price: ${basePrice} EGP`;
+      enablePayButton();
+    }
+
+    // تفعيل زر الدفع إذا تم اختيار يوم ومعاد
+    function enablePayButton() {
+      if (daySelect.value && timeSelect.value) {
+        payButton.disabled = false;
+      } else {
+        payButton.disabled = true;
+      }
+    }
+
+    // محاكاة للتحقق من العدد في الموعد
+    timeSelect.addEventListener('change', () => {
+      const selectedTime = timeSelect.value;
+      const randomCount = Math.floor(Math.random() * 10); // محاكاة عدد الحجز
+
+      if (randomCount >= 5) {
+        errorMsg.classList.remove('hidden');
+        payButton.disabled = true;
+      } else {
+        errorMsg.classList.add('hidden');
+        enablePayButton();
+      }
+    });
+  </script>
+
+</body>
+</html>

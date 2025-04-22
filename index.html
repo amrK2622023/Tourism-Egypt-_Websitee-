@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sign Up</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .signup-box {
+      position: relative;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      width: 300px;
+      text-align: center;
+      animation: glow 5s infinite alternate;
+    }
+
+    @keyframes glow {
+      0%   { box-shadow: 0 0 15px #00f,   0 0 30px #00f; }
+      25%  { box-shadow: 0 0 15px #8a2be2,0 0 30px #8a2be2; }
+      50%  { box-shadow: 0 0 15px #ff1493,0 0 30px #ff1493; }
+      75%  { box-shadow: 0 0 15px #00ffff,0 0 30px #00ffff; }
+      100% { box-shadow: 0 0 15px #00f,   0 0 30px #00f; }
+    }
+
+    #messageContainer {
+      position: absolute;
+      left: 50%;
+      bottom: 0;
+      transform: translate(-50%, 100%);
+      opacity: 0;
+      padding: 12px;
+      border-radius: 8px;
+      width: calc(100% - 20px);
+      box-sizing: border-box;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.4s ease-out, opacity 0.4s ease-out;
+      z-index: 10;
+    }
+
+    #messageContainer.show {
+      transform: translate(-50%, 0);
+      opacity: 1;
+    }
+
+    #messageContainer.success {
+      background-color: #28a745;
+      color: #fff;
+    }
+
+    #messageContainer.warning {
+      background-color: #333;
+      color: #FFC107;
+      border: 1px solid #FFC107;
+    }
+
+    #messageText {
+      margin-bottom: 8px;
+      line-height: 1.4;
+      white-space: pre-line;
+    }
+
+    #messageOkBtn {
+      padding: 8px 16px;
+      background: #fff;
+      color: inherit;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    h2 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button, .social-btn, .google-btn {
+      width: 100%;
+      padding: 10px;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      margin-top: 8px;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    button { background-color: #28a745; }
+    .social-btn { background-color: #4267B2; }
+    .google-btn { background-color: #DB4437; }
+
+    button:hover, .social-btn:hover, .google-btn:hover {
+      opacity: 0.9;
+    }
+
+    .link {
+      margin-top: 12px;
+      display: block;
+      color: #007bff;
+      text-decoration: none;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="signup-box">
+    <div id="messageContainer">
+      <div id="messageText"></div>
+      <button id="messageOkBtn">OK</button>
+    </div>
+
+    <h2>Create Your Account</h2>
+    <input type="text" id="nameInput" placeholder="Your Name" required>
+    <input type="email" id="emailInput" placeholder="Email Address" required>
+    <input type="password" id="password" placeholder="Password" required>
+    <button id="signupBtn">Sign Up</button>
+    <button id="facebookBtn" class="social-btn">Sign up with Facebook</button>
+    <button id="googleBtn" class="google-btn">Sign up with Google</button>
+    <a href="login.html" class="link">Already have an account? Log in</a>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+    import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCDaauyY8PZkjldfeQg52q_VsvIWsZUil8",
+      authDomain: "tourism-project-a7aa4.firebaseapp.com",
+      databaseURL: "https://tourism-project-a7aa4-default-rtdb.firebaseio.com",
+      projectId: "tourism-project-a7aa4",
+      storageBucket: "tourism-project-a7aa4.appspot.com",
+      messagingSenderId: "289286412408",
+      appId: "1:289286412408:web:4a4b452746e478b3f2f58d",
+      measurementId: "G-348E4LD0NC"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+
+    document.getElementById("signupBtn").addEventListener("click", function (e) {
+      e.preventDefault();
+      const name = document.getElementById("nameInput").value.trim();
+      const email = document.getElementById("emailInput").value.trim();
+      const password = document.getElementById("password").value;
+
+      if (name && email && password) {
+        set(ref(database, 'users/' + Date.now()), {
+          name: name,
+          email: email
+        }).then(() => {
+          showMessage(`🎉 Registration Successful!\nWelcome aboard, ${name}!`, 'success', 'provinces.html');
+        }).catch((error) => {
+          showMessage("❌ Error occurred: " + error, 'warning');
+        });
+      } else {
+        showMessage("⚠️ All fields are required.\nPlease complete the form.", 'warning');
+      }
+    });
+
+    document.getElementById("facebookBtn").addEventListener("click", function(e) {
+      e.preventDefault();
+      showMessage("🎉 You’ve successfully signed up with Facebook!", 'success', 'provinces.html');
+    });
+
+    document.getElementById("googleBtn").addEventListener("click", function(e) {
+      e.preventDefault();
+      showMessage("🎉 You’ve successfully signed up with Google!", 'success', 'provinces.html');
+    });
+
+    let nextPage = null;
+    function showMessage(msg, type = 'success', goTo = null) {
+      const container = document.getElementById("messageContainer");
+      const okBtn = document.getElementById("messageOkBtn");
+      document.getElementById("messageText").textContent = msg;
+      container.className = '';
+      container.classList.add(type, 'show');
+      okBtn.style.color = (type === 'warning') ? '#FFC107' : '#28a745';
+      nextPage = goTo;
+    }
+
+    document.getElementById("messageOkBtn").addEventListener("click", () => {
+      if (nextPage) {
+        window.location.href = nextPage;
+      } else {
+        document.getElementById("messageContainer").classList.remove('show');
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Provinces</title>
+  <style>
+    body {
+      background: linear-gradient(270deg, #000000, #1a1a1a, #333333);
+      background-size: 600% 600%;
+      animation: gradientBG 10s ease infinite;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    @keyframes gradientBG {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    h1 {
+      text-align: center;
+      color: #ffc107;
+    }
+
+    .provinces {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    .province {
+      background-color: #222;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #ffc107;
+      text-align: center;
+      width: 200px;
+      transition: transform 0.3s ease;
+    }
+
+    .province:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 15px #ffca28;
+    }
+
+    .province h3 {
+      color: #00e5ff;
+    }
+
+    .province button {
+      background-color: #ffc107;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .province button:hover {
+      background-color: #ffca28;
+    }
+  </style>
+</head>
+<body>
+  <h1>Select a Province</h1>
+
+  <div class="provinces">
+    <div class="province">
+      <h3>Cairo</h3>
+      <a href="cairo.html">
+        <button>Show Attractions</button>
+      </a>
+    </div>
+
+    <div class="province">
+      <h3>Giza</h3>
+      <a href="giza.html">
+        <button>Show Attractions</button>
+      </a>
+    </div>
+
+    <div class="province">
+      <h3>Luxor</h3>
+      <a href="luxor.html">
+        <button>Show Attractions</button>
+      </a>
+    </div>
+
+    <div class="province">
+      <h3>Aswan</h3>
+      <a href="aswan.html">
+        <button>Show Attractions</button>
+      </a>
+    </div>
+
+    <div class="province">
+      <h3>Alexandria</h3>
+      <a href="alexandria.html">
+        <button>Show Attractions</button>
+      </a>
+    </div>
+  </div>
+
+</body>
+</html>
